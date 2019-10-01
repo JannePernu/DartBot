@@ -14,7 +14,7 @@ import time
 import sys
 import cv2
 
-# define the range for the motors
+# Define the range for the motors, check more appropriate values later
 servoRange = (-90, 90)
 
 # function to handle keyboard interrupt
@@ -167,6 +167,6 @@ if __name__ == "__main__":
 		processTilting.join()
 		processSetServos.join()
 
-		# disable the servos
+		# Disable the servos. Normal code, might not need to disable
 		pth.servo_enable(1, False)
 		pth.servo_enable(2, False)
