@@ -22,7 +22,7 @@ def signal_handler(sig, frame):
 	# print a status message
 	print("[INFO] You pressed `ctrl + c`! Exiting...")
 
-	# disable the servos
+	# Disable the servos. These are assigned to pins 3 (SDA) and 5 (SDL)
 	pth.servo_enable(1, False)
 	pth.servo_enable(2, False)
 
