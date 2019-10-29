@@ -7,7 +7,7 @@ from multiprocessing import Process
 from imutils.video import VideoStream
 from pyimagesearch.objcenter import ObjCenter
 from pyimagesearch.pid import PID
-import pantilthat as pth
+import adafruit_servokit as ServoKit
 import argparse
 import signal
 import time
@@ -16,6 +16,7 @@ import cv2
 
 # Define the range for the motors, check more appropriate values later
 servoRange = (-90, 90)
+kit = ServoKit(channels=16)
 
 # function to handle keyboard interrupt
 def signal_handler(sig, frame):
@@ -23,8 +24,8 @@ def signal_handler(sig, frame):
 	print("[INFO] You pressed `ctrl + c`! Exiting...")
 
 	# Disable the servos. These are assigned to pins 3 (SDA) and 5 (SDL)
-	pth.servo_enable(1, False)
-	pth.servo_enable(2, False)
+	#pth.servo_enable(1, False)
+	#pth.servo_enable(2, False)
 
 	# exit
 	sys.exit()
@@ -99,11 +100,11 @@ def set_servos(pan, tlt):
 
 		# if the pan angle is within the range, pan
 		if in_range(panAngle, servoRange[0], servoRange[1]):
-			pth.pan(panAngle)
+			kit.servo[0].angle = panAngle
 
 		# if the tilt angle is within the range, tilt
 		if in_range(tltAngle, servoRange[0], servoRange[1]):
-			pth.tilt(tltAngle)
+			kit.servo[0].angle = tltAngle
 
 # check to see if this is the main body of execution
 if __name__ == "__main__":
@@ -115,9 +116,9 @@ if __name__ == "__main__":
 
 	# start a manager for managing process-safe variables
 	with Manager() as manager:
-		# enable the servos
-		pth.servo_enable(1, True)
-		pth.servo_enable(2, True)
+		# Enable the servos, might be no need for this
+		#pth.servo_enable(1, True)
+		#pth.servo_enable(2, True)
 
 		# set integer values for the object center (x, y)-coordinates
 		centerX = manager.Value("i", 0)
@@ -168,5 +169,5 @@ if __name__ == "__main__":
 		processSetServos.join()
 
 		# Disable the servos. Normal code, might not need to disable
-		pth.servo_enable(1, False)
-		pth.servo_enable(2, False)
+		#pth.servo_enable(1, False)
+		#pth.servo_enable(2, False)
