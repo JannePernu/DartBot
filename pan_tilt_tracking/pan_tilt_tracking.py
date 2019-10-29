@@ -61,8 +61,12 @@ def obj_center(args, objX, objY, centerX, centerY):
 		# extract the bounding box and draw it
 		if rect is not None:
 			(x, y, w, h) = rect
-			cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0),
-				2)
+			cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0),2)
+			
+			float dRat = dX/dY
+			float Rat = w/h
+			if Rat == dRat:
+				DistanceCalculation()
 
 		# display the frame to the screen
 		cv2.imshow("Pan-Tilt Face Tracking", frame)
