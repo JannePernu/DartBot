@@ -7,6 +7,7 @@ from multiprocessing import Process
 from imutils.video import VideoStream
 from pyimagesearch.objcenter import ObjCenter
 from pyimagesearch.pid import PID
+import DistanceCalculation as DC
 import adafruit_servokit as ServoKit
 import argparse
 import signal
@@ -66,7 +67,7 @@ def obj_center(args, objX, objY, centerX, centerY):
 			float dRat = dX/dY
 			float Rat = w/h
 			if Rat == dRat:
-				DistanceCalculation()
+				DC.DistanceCalculation()
 
 		# display the frame to the screen
 		cv2.imshow("Pan-Tilt Face Tracking", frame)
