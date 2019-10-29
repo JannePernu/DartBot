@@ -67,7 +67,7 @@ def obj_center(args, objX, objY, centerX, centerY):
 			float dRat = dX/dY
 			float Rat = w/h
 			if Rat == dRat:
-				DC.DistanceCalculation()
+				DC.DistanceCalculation(w, dX)
 
 		# display the frame to the screen
 		cv2.imshow("Pan-Tilt Face Tracking", frame)
